@@ -23,3 +23,11 @@ vpc:
     - cidrBlock: "10.23.112.0/20"
     - cidrBlock: "10.23.128.0/20"
     - cidrBlock: "10.23.144.0/20"
+
+rds:
+  name: "demo-cluster"
+  engine: "aurora-mysql"
+  family: "8.0"
+  parameters:
+    - key: character_set_server
+      value: utf8
