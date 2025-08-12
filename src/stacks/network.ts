@@ -33,7 +33,6 @@ export class NetworkStack extends TerraformStack {
         cidrBlock: subnet.cidrBlock,
         mapPublicIpOnLaunch: true,
         availabilityZone: Fn.element(zones.names, index % Fn.lengthOf(zones.names)),
-        // availabilityZone: `\${element(data.aws_availability_zones.zones.names, ${index} % length(${zones.names}))}`,
         dependsOn: [vpc],
       });
     });
