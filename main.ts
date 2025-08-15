@@ -1,4 +1,4 @@
-import { App } from "cdktf";
+import { App, S3Backend } from "cdktf";
 import { NetworkStack } from "./src/stacks/network";
 import { loadConfig } from "./src/helpers/config";
 
@@ -14,10 +14,12 @@ const config = loadConfig(`./config/${envName}.yaml`);
 const stackName = process.env.STACK_NAME;
 switch (stackName) {
   case "network":
-    new NetworkStack(app, "VPC", config);
-    break;
-  case "rds":
-    // Add RDS stack when needed
+    const networkStack = new NetworkStack(app, "VPC", config);
+    new S3Backend(networkStack, {
+      bucket: `${config.accountId}-terraform-states`,
+      key: `${envName}/network/terraform.tfstate`,
+      region: config.region
+    });
     break;
 }
 
