@@ -74,6 +74,10 @@ export class NetworkStack extends TerraformStack {
       value: vpc.arn,
     });
 
+    new TerraformOutput(this, "db-subnet-group-name", {
+      value: dbSubnetGroup.name,
+    });
+
     new TerraformOutput(this, "db-subnet-group-arn", {
       value: dbSubnetGroup.arn,
     });
